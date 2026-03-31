@@ -25,14 +25,14 @@ class LoginScreen extends StatelessWidget {
               Center(
                 child: Column(
                   children: [
-                    const SizedBox(height: 50),
-                    // Placeholder for illustration
-                    Icon(
-                      Icons.mobile_friendly,
-                      size: 120,
-                      color: AppColors.blue300,
+                    Image.asset(
+                      'asset/images/AUTHENTICATION.png', 
+                      height: 150, 
+                      width: 150, 
+                      fit: BoxFit.cover, 
                     ),
-                    const SizedBox(height: 50),
+
+                    SizedBox(height: 40),
                   ],
                 ),
               ),

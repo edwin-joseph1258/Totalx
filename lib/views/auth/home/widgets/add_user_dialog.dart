@@ -1,12 +1,12 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import '../../../core/constants/app_colors.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:total_x_application/core/constants/app_colors.dart';
+import 'package:total_x_application/data/models/user_model.dart';
 import 'package:total_x_application/view_models/home_view_model.dart';
-import '../../../data/models/user_model.dart';
 
 class AddUserDialog extends StatefulWidget {
   const AddUserDialog({Key? key}) : super(key: key);
@@ -67,14 +67,12 @@ class _AddUserDialogState extends State<AddUserDialog> {
       _isLoading = true;
     });
 
-    // Mock upload delay
     await Future.delayed(const Duration(seconds: 1));
 
     final newUser = UserModel(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       name: name,
       age: age,
-      // Just simulate image url with a placeholder if it's local since we don't have a storage backend
       imageUrl:
           'https://i.pravatar.cc/150?u=${DateTime.now().millisecondsSinceEpoch}',
     );

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../core/constants/app_colors.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import '../../view_models/home_view_model.dart';
+import 'package:total_x_application/core/constants/app_colors.dart';
+import 'package:total_x_application/view_models/home_view_model.dart';
 import 'widgets/user_card.dart';
 import 'widgets/add_user_dialog.dart';
 
@@ -49,32 +49,37 @@ class _HomeScreenState extends State<HomeScreen> {
             style: GoogleFonts.inter(fontWeight: FontWeight.w600, fontSize: 16),
           ),
           contentPadding: const EdgeInsets.only(top: 12, bottom: 20),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _sortOptionTile(context, 'All', 'All'),
-              _sortOptionTile(context, 'Older', 'Age: Elder'),
-              _sortOptionTile(context, 'Younger', 'Age: Younger'),
-            ],
+          content: Consumer<HomeViewModel>(
+            builder: (context, viewModel, child) {
+              return RadioGroup<String>(
+                groupValue: viewModel.sortOption,
+                onChanged: (val) {
+                  if (val != null) {
+                    context.read<HomeViewModel>().setSortOption(val);
+                    Navigator.pop(context);
+                  }
+                },
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _sortOptionTile('All', 'All'),
+                    _sortOptionTile('Older', 'Age: Elder'),
+                    _sortOptionTile('Younger', 'Age: Younger'),
+                  ],
+                ),
+              );
+            },
           ),
         );
       },
     );
   }
 
-  Widget _sortOptionTile(BuildContext context, String option, String title) {
-    final viewModel = context.watch<HomeViewModel>();
+  Widget _sortOptionTile(String option, String title) {
     return RadioListTile<String>(
       title: Text(title, style: GoogleFonts.inter(fontSize: 14)),
       value: option,
-      groupValue: viewModel.sortOption,
       activeColor: AppColors.blue,
-      onChanged: (val) {
-        if (val != null) {
-          context.read<HomeViewModel>().setSortOption(val);
-          Navigator.pop(context);
-        }
-      },
     );
   }
 

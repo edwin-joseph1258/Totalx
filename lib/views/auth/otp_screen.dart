@@ -32,7 +32,7 @@ class OtpScreen extends StatelessWidget {
       if (number.length >= 2) {
         return '*******${number.substring(number.length - 2)}';
       }
-      return '*******21'; // Fallback
+      return '*******21'; 
     }
 
     return Scaffold(
@@ -51,13 +51,14 @@ class OtpScreen extends StatelessWidget {
               Center(
                 child: Column(
                   children: [
-                    // Placeholder for illustration
-                    Icon(
-                      Icons.domain_verification,
-                      size: 120,
-                      color: AppColors.blue300,
+                    Image.asset(
+                      'asset/images/OTP.png',
+                      height: 150, 
+                      width: 150, 
+                      fit: BoxFit.cover, 
                     ),
-                    const SizedBox(height: 40),
+
+                    SizedBox(height: 40),
                   ],
                 ),
               ),

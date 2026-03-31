@@ -14,7 +14,6 @@ class AppColors {
 
   static const Color primaryBackground = Color(0xFFF3F3F3);
 
-  // Greys
   static const MaterialColor grey = Colors.grey;
   static final Color grey200 = Colors.grey.shade200;
   static final Color grey300 = Colors.grey.shade300;

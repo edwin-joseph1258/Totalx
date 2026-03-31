@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import '../../../core/constants/app_colors.dart';
+import 'package:total_x_application/core/constants/app_colors.dart';
+import 'package:total_x_application/data/models/user_model.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import '../../../data/models/user_model.dart';
 
 class UserCard extends StatelessWidget {
   final UserModel user;
-   UserCard({Key? key, required this.user}) : super(key: key);
+  const UserCard({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin:  EdgeInsets.only(bottom: 12),
+      margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(12),
@@ -19,12 +19,12 @@ class UserCard extends StatelessWidget {
           BoxShadow(
             color: AppColors.blackOpacity5,
             blurRadius: 8,
-            offset:  Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
       child: ListTile(
-        contentPadding:  EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         leading: CircleAvatar(
           radius: 28,
           backgroundImage: NetworkImage(user.imageUrl),
