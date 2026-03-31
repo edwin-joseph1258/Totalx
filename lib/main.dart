@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'view_models/auth_view_model.dart';
+import 'view_models/home_view_model.dart';
 import 'views/auth/login_screen.dart';
 import 'views/auth/otp_screen.dart';
+import 'views/home/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,6 +18,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthViewModel()),
+        ChangeNotifierProvider(create: (_) => HomeViewModel()),
       ],
       child: MaterialApp(
         title: 'Total X',
@@ -28,6 +31,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/login': (context) => const LoginScreen(),
           '/otp': (context) => const OtpScreen(),
+          '/home': (context) => const HomeScreen(),
         },
       ),
     );
