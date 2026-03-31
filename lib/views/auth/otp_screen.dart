@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../core/constants/app_colors.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
@@ -14,10 +16,14 @@ class OtpScreen extends StatelessWidget {
     final defaultPinTheme = PinTheme(
       width: 50,
       height: 50,
-      textStyle: GoogleFonts.inter(fontSize: 20, color: Colors.red, fontWeight: FontWeight.w600),
+      textStyle: GoogleFonts.inter(
+        fontSize: 20,
+        color: AppColors.red,
+        fontWeight: FontWeight.w600,
+      ),
       decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.black26),
+        color: AppColors.white,
+        border: Border.all(color: AppColors.black26),
         borderRadius: BorderRadius.circular(8),
       ),
     );
@@ -30,11 +36,11 @@ class OtpScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.white,
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: AppColors.black),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -46,7 +52,11 @@ class OtpScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     // Placeholder for illustration
-                    Icon(Icons.domain_verification, size: 120, color: Colors.blue.shade300),
+                    Icon(
+                      Icons.domain_verification,
+                      size: 120,
+                      color: AppColors.blue300,
+                    ),
                     const SizedBox(height: 40),
                   ],
                 ),
@@ -56,13 +66,16 @@ class OtpScreen extends StatelessWidget {
                 style: GoogleFonts.inter(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: Colors.black87,
+                  color: AppColors.black87,
                 ),
               ),
               const SizedBox(height: 12),
               Text(
                 'Enter the verification code we just sent to your number +91 ${formatMaskedNumber(authViewModel.phoneNumber)}.',
-                style: GoogleFonts.inter(fontSize: 14, color: Colors.black54),
+                style: GoogleFonts.inter(
+                  fontSize: 14,
+                  color: AppColors.black54,
+                ),
               ),
               const SizedBox(height: 32),
               Center(
@@ -81,7 +94,10 @@ class OtpScreen extends StatelessWidget {
               Center(
                 child: Text(
                   '${authViewModel.resendTimer} Sec',
-                  style: GoogleFonts.inter(color: Colors.red, fontWeight: FontWeight.w500),
+                  style: GoogleFonts.inter(
+                    color: AppColors.red,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
               const SizedBox(height: 16),
@@ -91,12 +107,12 @@ class OtpScreen extends StatelessWidget {
                   children: [
                     Text(
                       'Don\'t Get OTP? ',
-                      style: GoogleFonts.inter(color: Colors.black54),
+                      style: GoogleFonts.inter(color: AppColors.black54),
                     ),
                     TextButton(
-                      onPressed: authViewModel.resendTimer == 0 
-                        ? () => authViewModel.startResendTimer() 
-                        : null,
+                      onPressed: authViewModel.resendTimer == 0
+                          ? () => authViewModel.startResendTimer()
+                          : null,
                       style: TextButton.styleFrom(
                         padding: EdgeInsets.zero,
                         minimumSize: Size.zero,
@@ -105,7 +121,9 @@ class OtpScreen extends StatelessWidget {
                       child: Text(
                         'Resend',
                         style: GoogleFonts.inter(
-                          color: authViewModel.resendTimer == 0 ? Colors.blue.shade600 : Colors.blue.shade200,
+                          color: authViewModel.resendTimer == 0
+                              ? AppColors.blue.shade600
+                              : AppColors.blue.shade200,
                           fontWeight: FontWeight.w600,
                           decoration: TextDecoration.underline,
                         ),

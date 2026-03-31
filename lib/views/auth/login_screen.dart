@@ -1,5 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import '../../core/constants/app_colors.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../view_models/auth_view_model.dart';
@@ -13,7 +15,7 @@ class LoginScreen extends StatelessWidget {
     final authViewModel = Provider.of<AuthViewModel>(context);
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 40.0),
@@ -25,7 +27,11 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     const SizedBox(height: 50),
                     // Placeholder for illustration
-                    Icon(Icons.mobile_friendly, size: 120, color: Colors.blue.shade300),
+                    Icon(
+                      Icons.mobile_friendly,
+                      size: 120,
+                      color: AppColors.blue300,
+                    ),
                     const SizedBox(height: 50),
                   ],
                 ),
@@ -35,7 +41,7 @@ class LoginScreen extends StatelessWidget {
                 style: GoogleFonts.inter(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: Colors.black87,
+                  color: AppColors.black87,
                 ),
               ),
               const SizedBox(height: 16),
@@ -44,19 +50,34 @@ class LoginScreen extends StatelessWidget {
                 onChanged: authViewModel.setPhoneNumber,
                 decoration: InputDecoration(
                   hintText: 'Enter Phone Number *',
-                  hintStyle: GoogleFonts.inter(color: Colors.grey.shade400, fontSize: 14),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  hintStyle: GoogleFonts.inter(
+                    color: AppColors.grey400,
+                    fontSize: 14,
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 16,
+                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(color: Colors.black12, width: 1.5),
+                    borderSide: const BorderSide(
+                      color: AppColors.black12,
+                      width: 1.5,
+                    ),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(color: Colors.black12, width: 1.5),
+                    borderSide: const BorderSide(
+                      color: AppColors.black12,
+                      width: 1.5,
+                    ),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(color: Colors.deepOrange, width: 1.5),
+                    borderSide: const BorderSide(
+                      color: Colors.deepOrange,
+                      width: 1.5,
+                    ),
                   ),
                 ),
               ),
@@ -64,17 +85,26 @@ class LoginScreen extends StatelessWidget {
               RichText(
                 text: TextSpan(
                   text: 'By Continuing, I agree to TotalX\'s ',
-                  style: GoogleFonts.inter(color: Colors.grey.shade600, fontSize: 12),
+                  style: GoogleFonts.inter(
+                    color: AppColors.grey600,
+                    fontSize: 12,
+                  ),
                   children: [
                     TextSpan(
                       text: 'Terms and condition',
-                      style: GoogleFonts.inter(color: Colors.blue.shade400, fontSize: 12),
+                      style: GoogleFonts.inter(
+                        color: AppColors.blue.shade400,
+                        fontSize: 12,
+                      ),
                       recognizer: TapGestureRecognizer()..onTap = () {},
                     ),
                     const TextSpan(text: ' & '),
                     TextSpan(
                       text: 'privacy policy',
-                      style: GoogleFonts.inter(color: Colors.blue.shade400, fontSize: 12),
+                      style: GoogleFonts.inter(
+                        color: AppColors.blue.shade400,
+                        fontSize: 12,
+                      ),
                       recognizer: TapGestureRecognizer()..onTap = () {},
                     ),
                   ],

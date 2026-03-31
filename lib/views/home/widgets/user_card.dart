@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../core/constants/app_colors.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import '../../../data/models/user_model.dart';
 
@@ -11,11 +13,11 @@ class UserCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.white,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: AppColors.blackOpacity5,
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -26,22 +28,19 @@ class UserCard extends StatelessWidget {
         leading: CircleAvatar(
           radius: 28,
           backgroundImage: NetworkImage(user.imageUrl),
-          backgroundColor: Colors.grey.shade200,
+          backgroundColor: AppColors.grey200,
         ),
         title: Text(
           user.name,
           style: GoogleFonts.inter(
             fontWeight: FontWeight.w600,
             fontSize: 15,
-            color: Colors.black87,
+            color: AppColors.black87,
           ),
         ),
         subtitle: Text(
           'Age: ${user.age}',
-          style: GoogleFonts.inter(
-            fontSize: 13,
-            color: Colors.black54,
-          ),
+          style: GoogleFonts.inter(fontSize: 13, color: AppColors.black54),
         ),
       ),
     );

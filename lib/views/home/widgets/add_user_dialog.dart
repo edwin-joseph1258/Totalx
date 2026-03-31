@@ -1,5 +1,7 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import '../../../core/constants/app_colors.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -29,14 +31,14 @@ class _AddUserDialogState extends State<AddUserDialog> {
           _selectedImageBytes = bytes;
         });
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('No image selected.')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('No image selected.')));
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to pick image: $e')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Failed to pick image: $e')));
     }
   }
 
@@ -46,7 +48,9 @@ class _AddUserDialogState extends State<AddUserDialog> {
 
     if (name.isEmpty || ageText.isEmpty || _selectedImageBytes == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please provide name, age, and an image.')),
+        const SnackBar(
+          content: Text('Please provide name, age, and an image.'),
+        ),
       );
       return;
     }
@@ -71,12 +75,13 @@ class _AddUserDialogState extends State<AddUserDialog> {
       name: name,
       age: age,
       // Just simulate image url with a placeholder if it's local since we don't have a storage backend
-      imageUrl: 'https://i.pravatar.cc/150?u=${DateTime.now().millisecondsSinceEpoch}',
+      imageUrl:
+          'https://i.pravatar.cc/150?u=${DateTime.now().millisecondsSinceEpoch}',
     );
 
     if (mounted) {
-       Provider.of<HomeViewModel>(context, listen: false).addUser(newUser);
-       Navigator.pop(context);
+      Provider.of<HomeViewModel>(context, listen: false).addUser(newUser);
+      Navigator.pop(context);
     }
   }
 
@@ -95,7 +100,7 @@ class _AddUserDialogState extends State<AddUserDialog> {
               style: GoogleFonts.inter(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: Colors.black87,
+                color: AppColors.black87,
               ),
             ),
             const SizedBox(height: 20),
@@ -107,10 +112,16 @@ class _AddUserDialogState extends State<AddUserDialog> {
                   children: [
                     CircleAvatar(
                       radius: 40,
-                      backgroundColor: Colors.blue,
-                      backgroundImage: _selectedImageBytes != null ? MemoryImage(_selectedImageBytes!) : null,
+                      backgroundColor: AppColors.blue,
+                      backgroundImage: _selectedImageBytes != null
+                          ? MemoryImage(_selectedImageBytes!)
+                          : null,
                       child: _selectedImageBytes == null
-                          ? const Icon(Icons.person, size: 50, color: Colors.white)
+                          ? const Icon(
+                              Icons.person,
+                              size: 50,
+                              color: AppColors.white,
+                            )
                           : null,
                     ),
                     Positioned(
@@ -120,13 +131,17 @@ class _AddUserDialogState extends State<AddUserDialog> {
                       child: Container(
                         height: 24,
                         decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.5),
+                          color: AppColors.blackOpacity50,
                           borderRadius: const BorderRadius.only(
                             bottomLeft: Radius.circular(40),
                             bottomRight: Radius.circular(40),
                           ),
                         ),
-                        child: const Icon(Icons.camera_alt, color: Colors.white, size: 14),
+                        child: const Icon(
+                          Icons.camera_alt,
+                          color: AppColors.white,
+                          size: 14,
+                        ),
                       ),
                     ),
                   ],
@@ -134,41 +149,65 @@ class _AddUserDialogState extends State<AddUserDialog> {
               ),
             ),
             const SizedBox(height: 20),
-            Text('Name', style: GoogleFonts.inter(color: Colors.grey.shade600, fontSize: 13)),
+            Text(
+              'Name',
+              style: GoogleFonts.inter(
+                color: AppColors.grey600,
+                fontSize: 13,
+              ),
+            ),
             const SizedBox(height: 8),
             TextField(
               controller: _nameController,
               decoration: InputDecoration(
                 hintText: 'Shaukath Ali OP',
-                hintStyle: GoogleFonts.inter(color: Colors.grey.shade400, fontSize: 14),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                hintStyle: GoogleFonts.inter(
+                  color: AppColors.grey400,
+                  fontSize: 14,
+                ),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 12,
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(color: Colors.grey.shade300),
+                  borderSide: BorderSide(color: AppColors.grey300),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(color: Colors.grey.shade300),
+                  borderSide: BorderSide(color: AppColors.grey300),
                 ),
               ),
             ),
             const SizedBox(height: 16),
-            Text('Age', style: GoogleFonts.inter(color: Colors.grey.shade600, fontSize: 13)),
+            Text(
+              'Age',
+              style: GoogleFonts.inter(
+                color: AppColors.grey600,
+                fontSize: 13,
+              ),
+            ),
             const SizedBox(height: 8),
             TextField(
               controller: _ageController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 hintText: '43',
-                hintStyle: GoogleFonts.inter(color: Colors.grey.shade400, fontSize: 14),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                hintStyle: GoogleFonts.inter(
+                  color: AppColors.grey400,
+                  fontSize: 14,
+                ),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 12,
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(color: Colors.grey.shade300),
+                  borderSide: BorderSide(color: AppColors.grey300),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(color: Colors.grey.shade300),
+                  borderSide: BorderSide(color: AppColors.grey300),
                 ),
               ),
             ),
@@ -178,28 +217,57 @@ class _AddUserDialogState extends State<AddUserDialog> {
               children: [
                 TextButton(
                   style: TextButton.styleFrom(
-                    backgroundColor: Colors.grey.shade300,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                    backgroundColor: AppColors.grey300,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 12,
+                    ),
                   ),
                   onPressed: () => Navigator.pop(context),
-                  child: Text('Cancel', style: GoogleFonts.inter(color: Colors.black87, fontWeight: FontWeight.w600)),
+                  child: Text(
+                    'Cancel',
+                    style: GoogleFonts.inter(
+                      color: AppColors.black87,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ),
                 const SizedBox(width: 12),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    backgroundColor: AppColors.blue,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 12,
+                    ),
                     elevation: 0,
                   ),
                   onPressed: _isLoading ? null : _saveUser,
-                  child: _isLoading 
-                      ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
-                      : Text('Save', style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w600)),
+                  child: _isLoading
+                      ? const SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(
+                            color: AppColors.white,
+                            strokeWidth: 2,
+                          ),
+                        )
+                      : Text(
+                          'Save',
+                          style: GoogleFonts.inter(
+                            color: AppColors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

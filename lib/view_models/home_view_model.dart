@@ -14,13 +14,12 @@ class HomeViewModel extends ChangeNotifier {
   bool get hasMore => _hasMore;
 
   String _searchQuery = '';
-  String _sortOption = 'All'; // All, Older, Younger
+  String _sortOption = 'All'; 
   String get sortOption => _sortOption;
 
   int _currentPage = 0;
   final int _pageSize = 15;
 
-  // Mock database (Only 7 users)
   final List<UserModel> _mockDatabase = [
     UserModel(id: '0', name: 'Martin Dokidis', age: 34, imageUrl: 'https://i.pravatar.cc/150?img=11'),
     UserModel(id: '1', name: 'Marilyn Rosser', age: 34, imageUrl: 'https://i.pravatar.cc/150?img=5'),
@@ -48,7 +47,6 @@ class HomeViewModel extends ChangeNotifier {
     _isLoading = true;
     if (isRefresh) notifyListeners();
 
-    // Simulate network delay for lazy loading
     await Future.delayed(const Duration(seconds: 1));
 
     final startIndex = _currentPage * _pageSize;

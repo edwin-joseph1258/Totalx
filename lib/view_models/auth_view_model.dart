@@ -17,7 +17,6 @@ class AuthViewModel extends ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  // Replace with your MSG91 Auth details
   final String _msg91AuthKey = '504657AujfklDN69cb5bd1P1';
   final String _templateId = '69cb5cead261a29daa0d3d22';
 

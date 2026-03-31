@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../core/constants/app_colors.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../view_models/home_view_model.dart';
@@ -22,7 +24,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _onScroll() {
-    if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent - 200) {
+    if (_scrollController.position.pixels >=
+        _scrollController.position.maxScrollExtent - 200) {
       context.read<HomeViewModel>().fetchUsers();
     }
   }
@@ -37,37 +40,42 @@ class _HomeScreenState extends State<HomeScreen> {
     showDialog(
       context: context,
       builder: (context) {
-         return AlertDialog(
-           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-           title: Text('Sort', style: GoogleFonts.inter(fontWeight: FontWeight.w600, fontSize: 16)),
-           contentPadding: const EdgeInsets.only(top: 12, bottom: 20),
-           content: Column(
-             mainAxisSize: MainAxisSize.min,
-             children: [
-                _sortOptionTile(context, 'All', 'All'),
-                _sortOptionTile(context, 'Older', 'Age: Elder'),
-                _sortOptionTile(context, 'Younger', 'Age: Younger'),
-             ],
-           ),
-         );
-      }
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          title: Text(
+            'Sort',
+            style: GoogleFonts.inter(fontWeight: FontWeight.w600, fontSize: 16),
+          ),
+          contentPadding: const EdgeInsets.only(top: 12, bottom: 20),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _sortOptionTile(context, 'All', 'All'),
+              _sortOptionTile(context, 'Older', 'Age: Elder'),
+              _sortOptionTile(context, 'Younger', 'Age: Younger'),
+            ],
+          ),
+        );
+      },
     );
   }
 
   Widget _sortOptionTile(BuildContext context, String option, String title) {
-     final viewModel = context.watch<HomeViewModel>();
-     return RadioListTile<String>(
-       title: Text(title, style: GoogleFonts.inter(fontSize: 14)),
-       value: option,
-       groupValue: viewModel.sortOption,
-       activeColor: Colors.blue,
-       onChanged: (val) {
-          if (val != null) {
-             context.read<HomeViewModel>().setSortOption(val);
-             Navigator.pop(context);
-          }
-       },
-     );
+    final viewModel = context.watch<HomeViewModel>();
+    return RadioListTile<String>(
+      title: Text(title, style: GoogleFonts.inter(fontSize: 14)),
+      value: option,
+      groupValue: viewModel.sortOption,
+      activeColor: AppColors.blue,
+      onChanged: (val) {
+        if (val != null) {
+          context.read<HomeViewModel>().setSortOption(val);
+          Navigator.pop(context);
+        }
+      },
+    );
   }
 
   @override
@@ -75,16 +83,20 @@ class _HomeScreenState extends State<HomeScreen> {
     final viewModel = context.watch<HomeViewModel>();
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF3F3F3),
+      backgroundColor: AppColors.primaryBackground,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: AppColors.black,
         title: Row(
           children: [
-            const Icon(Icons.location_on, color: Colors.white, size: 20),
+            const Icon(Icons.location_on, color: AppColors.white, size: 20),
             const SizedBox(width: 8),
             Text(
               'Nilambur',
-              style: GoogleFonts.inter(color: Colors.white, fontSize: 16, fontWeight: FontWeight.normal),
+              style: GoogleFonts.inter(
+                color: AppColors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.normal,
+              ),
             ),
           ],
         ),
@@ -103,11 +115,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       onChanged: viewModel.setSearchQuery,
                       decoration: InputDecoration(
                         hintText: 'Search by name',
-                        hintStyle: GoogleFonts.inter(color: Colors.grey.shade400, fontSize: 14),
-                        prefixIcon: const Icon(Icons.search, color: Colors.grey),
-                        contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+                        hintStyle: GoogleFonts.inter(
+                          color: AppColors.grey400,
+                          fontSize: 14,
+                        ),
+                        prefixIcon: const Icon(
+                          Icons.search,
+                          color: AppColors.grey,
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                          vertical: 0,
+                          horizontal: 16,
+                        ),
                         filled: true,
-                        fillColor: Colors.white,
+                        fillColor: AppColors.white,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
                           borderSide: BorderSide.none,
@@ -122,14 +143,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 48,
                       width: 48,
                       decoration: BoxDecoration(
-                        color: Colors.black,
+                        color: AppColors.black,
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: const Icon(Icons.filter_list, color: Colors.white),
+                      child: const Icon(
+                        Icons.filter_list,
+                        color: AppColors.white,
+                      ),
                     ),
-                  )
+                  ),
                 ],
-            )),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
@@ -137,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: GoogleFonts.inter(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+                  color: AppColors.black87,
                 ),
               ),
             ),
@@ -146,34 +171,51 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: viewModel.users.isEmpty && viewModel.isLoading
-                    ? const Center(child: CircularProgressIndicator(color: Colors.black))
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                          color: AppColors.black,
+                        ),
+                      )
                     : viewModel.users.isEmpty
-                        ? Center(child: Text('No users found.', style: GoogleFonts.inter()))
-                        : ListView.builder(
-                            controller: _scrollController,
-                            itemCount: viewModel.users.length + (viewModel.hasMore && viewModel.users.isNotEmpty ? 1 : 0),
-                            itemBuilder: (context, index) {
-                              if (index == viewModel.users.length) {
-                                return const Padding(
-                                  padding: EdgeInsets.all(16.0),
-                                  child: Center(child: CircularProgressIndicator(color: Colors.black)),
-                                );
-                              }
-                              return UserCard(user: viewModel.users[index]);
-                            },
-                          ),
+                    ? Center(
+                        child: Text(
+                          'No users found.',
+                          style: GoogleFonts.inter(),
+                        ),
+                      )
+                    : ListView.builder(
+                        controller: _scrollController,
+                        itemCount:
+                            viewModel.users.length +
+                            (viewModel.hasMore && viewModel.users.isNotEmpty
+                                ? 1
+                                : 0),
+                        itemBuilder: (context, index) {
+                          if (index == viewModel.users.length) {
+                            return const Padding(
+                              padding: EdgeInsets.all(16.0),
+                              child: Center(
+                                child: CircularProgressIndicator(
+                                  color: AppColors.black,
+                                ),
+                              ),
+                            );
+                          }
+                          return UserCard(user: viewModel.users[index]);
+                        },
+                      ),
               ),
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.black,
+        backgroundColor: AppColors.black,
         shape: const CircleBorder(),
         onPressed: () {
           showDialog(context: context, builder: (_) => const AddUserDialog());
         },
-        child: const Icon(Icons.add, color: Colors.white, size: 28),
+        child: const Icon(Icons.add, color: AppColors.white, size: 28),
       ),
     );
   }
